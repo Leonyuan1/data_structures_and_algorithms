@@ -141,6 +141,9 @@
   <ItemGroup>
     <ClCompile Include="Experiment with data structures and algorithms.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AStack.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

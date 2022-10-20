@@ -2,19 +2,125 @@
 //
 
 #include <iostream>
+#include<stdlib.h>
+#include<string>
+#include<stack>
+using namespace std;
+#define MAXSIZE 100
+
+//string change(string str)//转化为后缀表达式的函数
+//{
+//	AStack<char> s;
+//
+//
+//
+////操作数次序不变，运算符次序发生变化，同时去掉括号。
+//	//	转换规则是：设立一个栈，存放运算符，首先栈为空，
+//	//	从左到右扫描中缀表达式，若遇操作数，直接输出；
+//
+//	/*若遇运算符，则与栈顶比较，栈顶运算符级别比当前运算符级别低则进栈，否则退出栈顶元素并输出；
+//		若遇左括号，进栈；若遇右括号，则一直退栈输出，直到退到左括号止。
+//		当栈变成空时，输出的结果即为后缀表达式。*/
+//}
+
+////中缀表达式转后缀表达式函数
+string change(const string getstring)
+{
+	stack <char> str_stack;
+	int start, end;
+	string tempstring;
+	string ss = "+-*/%()";
+	string want;
+	for (int i = 0; i < getstring.length(); i = end)
+	{
+		start = i;
+		end = getstring.find_first_of(ss, i);
+		if (start == end)
+		{
+			tempstring = getstring.substr(start, 1);
+			end = end + 1;
+		}
+		else
+		{
+			
+			if (end == -1)
+			{
+				end = getstring.length();
+			}
+			tempstring = getstring.substr(start, end-start);
+		}
+		if (tempstring == "(")
+		{
+			char c = '(';
+			str_stack.push(c);
+		}
+		else if (tempstring == ")")
+		{
+			while(str_stack.top() != '(')
+			{
+				want += str_stack.top();
+				want += " ";
+				str_stack.pop();
+			}str_stack.pop();
+
+		}
+		else if ((tempstring == "*" )|| (tempstring == "/"))
+		{
+			while ((str_stack.empty() != true) && (str_stack.top() == '*' || str_stack.top() == '/'))
+			{
+				want += str_stack.top();
+				want += " ";
+				str_stack.pop();
+			}
+			char c = tempstring[0];
+			str_stack.push(c);
+		}
+		else if ((tempstring == "+") || (tempstring == "-"))
+		{
+			while ((str_stack.empty() != true)&&(str_stack.top() != '('))
+			{
+				want += str_stack.top();
+				want += " ";
+				str_stack.pop();
+			}
+			char c = tempstring[0];
+			str_stack.push(c);
+		}
+		else
+		{
+			want += tempstring;
+			want += " ";
+		}	
+	}
+	while (str_stack.empty() != true)
+	{
+		want += str_stack.top();
+		want += " ";
+		str_stack.pop();
+
+	}
+	return want;
+
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	string s = "0123456789+-*/%().";
+	string getstring;//用户输入表达式字符串
+	string changed_string;//得到的后缀表达式
+	cout << "请输入你要计算的表达式：" << endl;
+	cin >> getstring;
+	int a;
+	a = getstring.find_first_of(s, 0);
+	if (a == -1)
+	{
+		cout << "error!!!" << endl;
+	}
+	else
+	{
+		changed_string = change(getstring);//转化为后缀表达式
+		cout << changed_string << endl;
+	}
+	system("pause");
+	return 0;
 }
-
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
-
-// 入门使用技巧: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
