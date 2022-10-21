@@ -23,5 +23,11 @@
     <ClInclude Include="AStack.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="calculate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="change.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
