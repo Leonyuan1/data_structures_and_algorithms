@@ -30,7 +30,6 @@ double calculate(string want)
 			{
 				if (temp_string == "+")
 				{
-					cout << temp_string << endl;
 					h = cal_stack.top();
 					cal_stack.pop();
 					j = cal_stack.top();
