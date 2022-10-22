@@ -60,7 +60,7 @@ double calculate(string want)
 					h = cal_stack.top();
 					cal_stack.pop();
 					j = cal_stack.top();
-					k = j / k;
+					k = j / h;
 					cal_stack.pop();
 					cal_stack.push(k);
 				}
