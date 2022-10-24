@@ -13,11 +13,19 @@ void use();
 
 int main()
 {
-
-	cout << "************Welcome to the expression calculator************"<<endl;
+	cout << "************Welcome to the expression calculator************" << endl;
+	cout << "************************************************************" << endl;
+	cout << "************************************************************" << endl;
+	cout << "************************************************************" << endl;
 	cout << "Please enter the expression to evaluate quickly!" << endl;
-	cout<<"Please pay attention to the symbol specification and enjoy your use!"<<endl;
+	cout << "Please pay attention to the symbol specification and enjoy your use!" << endl;
 	use();	
+	cout << "************************************************************" << endl;
+	cout << "************************************************************" << endl;
+	cout << "************************************************************" << endl;
+	cout << "************************************************************" << endl;
+	cout << "************************************************************" << endl;
+	cout << "*******Thank you for using the expression calculator********" << endl;
 	return 0;
 }
 
@@ -27,6 +35,7 @@ void use()
 	string s = "0123456789+-*/%().";
 	string getstring;//用户输入表达式字符串
 	string changed_string;//得到的后缀表达式
+	
 	cout << "请输入你要计算的表达式：" << endl;
 	cin >> getstring;
 	int a;
@@ -41,9 +50,11 @@ void use()
 		cout << "得到的后缀表达式：" << changed_string << endl;
 	}
 	double answer = calculate(changed_string);
-	cout << answer << endl;
+	cout << " " << endl;
+	cout <<"result:" << answer << endl;
 	cout << " " << endl;
 	cout << "如需继续使用请输入c清零！" << endl;
+	cout << " " << endl;
 	cin >> c;
 	if (c == "c"||c=="C")
 	{
