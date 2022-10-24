@@ -64,38 +64,39 @@ string change(const string getstring)//中缀表达式转后缀表达式
 			}
 			else if (tempstring == "-")//由于减号有可能代表负数 故将该情况分开讨论
 			{
-				end = end - 1;
-				if (end==0)
+				int end2 = end - 1;
+				if (end2==0)
 				{
 					end = getstring.find_first_of(ss, 1);
 					want += getstring.substr(start, end - start);
 					want += " ";
 				}
-				else if (end >= 1)
+				else if (end2 >= 1)
 				{
 					string a1;
-					int end1 = end;
-					a1 = getstring.substr(end - 1, 1);
+					//int end1 = end;
+					a1 = getstring.substr(end2 - 1, 1);
 					if (a1 == "(")
 					{
 						end = getstring.find_first_of(ss, end + 1);
-						want += getstring.substr(end1, end - end1);
+						want += getstring.substr(end2, end - end2);
 						want += " ";
+					}
+					else
+					{
+						while ((str_stack.empty() != true) && (str_stack.top() != '('))
+						{
+							want += str_stack.top();
+							want += " ";
+							str_stack.pop();
+						}
+						char c = tempstring[0];
+						str_stack.push(c);
 					}
 
 					
 				}
-				else
-				{
-					while ((str_stack.empty() != true) && (str_stack.top() != '('))
-					{
-						want += str_stack.top();
-						want += " ";
-						str_stack.pop();
-					}
-					char c = tempstring[0];
-					str_stack.push(c);
-				}
+				
 			}
 		
 		}
