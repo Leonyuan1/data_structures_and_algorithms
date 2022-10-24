@@ -43,6 +43,7 @@ void use()
 	if (a == -1)
 	{
 		cout << "error!!!" << endl;
+		use();
 	}
 	else
 	{
