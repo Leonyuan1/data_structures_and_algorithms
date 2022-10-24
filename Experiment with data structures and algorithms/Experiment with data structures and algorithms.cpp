@@ -9,32 +9,44 @@ using namespace std;
 #define MAXSIZE 100
 #include"calculate.h"
 #include"change.h"
-
+void use();
 
 int main()
 {
-	string s = "0123456789+-*/%().";
-	string getstring;//用户输入表达式字符串
-	string changed_string;//得到的后缀表达式
+
 	cout << "************Welcome to the expression calculator************"<<endl;
 	cout << "Please enter the expression to evaluate quickly!" << endl;
 	cout<<"Please pay attention to the symbol specification and enjoy your use!"<<endl;
-	
-	
-		cout << "请输入你要计算的表达式：" << endl;
-		cin >> getstring;
-		int a;
-		a = getstring.find_first_of(s, 0);
-		if (a == -1)
-		{
-			cout << "error!!!" << endl;
-		}
-		else
-		{
-			changed_string = change(getstring);//转化为后缀表达式
-			cout << "得到的后缀表达式：" << changed_string << endl;
-		}
-		double answer = calculate(changed_string);
-		cout << answer << endl;
+	use();	
 	return 0;
+}
+
+void use()
+{
+	string c;
+	string s = "0123456789+-*/%().";
+	string getstring;//用户输入表达式字符串
+	string changed_string;//得到的后缀表达式
+	cout << "请输入你要计算的表达式：" << endl;
+	cin >> getstring;
+	int a;
+	a = getstring.find_first_of(s, 0);
+	if (a == -1)
+	{
+		cout << "error!!!" << endl;
+	}
+	else
+	{
+		changed_string = change(getstring);//转化为后缀表达式
+		cout << "得到的后缀表达式：" << changed_string << endl;
+	}
+	double answer = calculate(changed_string);
+	cout << answer << endl;
+	cout << " " << endl;
+	cout << "如需继续使用请输入c清零！" << endl;
+	cin >> c;
+	if (c == "c"||c=="C")
+	{
+		use();
+	}
 }
