@@ -18,8 +18,9 @@ int main()
 	cout << "************************************************************" << endl;
 	cout << "************************************************************" << endl;
 	cout << "Please enter the expression to evaluate quickly!" << endl;
-	cout << "Please pay attention to the symbol specification and enjoy your use!" << endl;
-	use();	
+	cout << "Please pay attention to the symbol specification and enjoy your use;" << endl;
+	cout << "Otherwise, you are responsible for any errors in the calculation results!" << endl;
+	use();
 	cout << "************************************************************" << endl;
 	cout << "************************************************************" << endl;
 	cout << "************************************************************" << endl;
@@ -33,14 +34,15 @@ void use()
 {
 	string c;
 	string s = "0123456789+-*/%().";
+	string sss = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,，。;'{}[]\ !@$#^&_|"":<>?《》“”~`";
 	string getstring;//用户输入表达式字符串
 	string changed_string;//得到的后缀表达式
-	
+
 	cout << "请输入你要计算的表达式：" << endl;
 	cin >> getstring;
 	int a;
-	a = getstring.find_first_of(s, 0);
-	if (a == -1)
+	a = getstring.find_first_of(sss, 0);
+	if (a != -1)
 	{
 		cout << "error!!!" << endl;
 		use();
@@ -48,16 +50,20 @@ void use()
 	else
 	{
 		changed_string = change(getstring);//转化为后缀表达式
+		if (changed_string == "no")
+		{
+			use();
+		}
 		cout << "得到的后缀表达式：" << changed_string << endl;
 	}
-	double answer = calculate(changed_string);
+	//double answer = calculate(changed_string);
+	calculate(changed_string);
 	cout << " " << endl;
-	cout <<"result:" << answer << endl;
 	cout << " " << endl;
 	cout << "如需继续使用请输入c清零！" << endl;
 	cout << " " << endl;
 	cin >> c;
-	if (c == "c"||c=="C")
+	if (c == "c" || c == "C")
 	{
 		use();
 	}

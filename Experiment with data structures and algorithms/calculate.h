@@ -1,4 +1,4 @@
-double calculate(string want)
+void calculate(string want)
 {
 	stack<double>cal_stack;
 	string a = " ";
@@ -17,7 +17,7 @@ double calculate(string want)
 			temp_string = want.substr(start, end - start);
 			int judge1;
 			judge1 = temp_string.find_first_of(c, 0);
-			if (judge1 != -1)//Êý×Ö
+			if (judge1 != -1)
 			{
 				int len;
 				len = temp_string.size() + 1;
@@ -26,7 +26,7 @@ double calculate(string want)
 				double numble = stod(arr);
 				cal_stack.push(numble);
 			}
-			else//ÔËËã·ûºÅ
+			else
 			{
 				if (temp_string == "+")
 				{
@@ -42,7 +42,7 @@ double calculate(string want)
 					h = cal_stack.top();
 					cal_stack.pop();
 					j = cal_stack.top();
-					k = j-h;
+					k = j - h;
 					cal_stack.pop();
 					cal_stack.push(k);
 				}
@@ -58,11 +58,21 @@ double calculate(string want)
 				else if (temp_string == "/")
 				{
 					h = cal_stack.top();
-					cal_stack.pop();
-					j = cal_stack.top();
-					k = j / h;
-					cal_stack.pop();
-					cal_stack.push(k);
+					if (h == 0)
+					{
+						cout << "error " << endl;
+						return;
+
+					}
+					else {
+						cal_stack.pop();
+						j = cal_stack.top();
+						k = j / h;
+						cal_stack.pop();
+						cal_stack.push(k);
+
+					}
+
 				}
 
 			}
@@ -70,5 +80,7 @@ double calculate(string want)
 		}
 	}
 	result = cal_stack.top();
-	return result;
+	cout << "result:" << result << endl;
+	return;
+
 }

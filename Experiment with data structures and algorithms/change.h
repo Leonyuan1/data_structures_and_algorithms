@@ -14,7 +14,9 @@ string change(const string getstring)//中缀表达式转后缀表达式
 	stack <char> str_stack;//用来存运算符的栈
 	int start, end;//用来存处理的字段的始末
 	string tempstring;//中间字符串
-	string ss = "+-*/%()";//符号
+	string ss = "+-*/%()#";//符号
+	int count1 = 0;//符号
+	int count2 = 0;//数字
 	string want;
 	for (int i = 0; i < getstring.length(); i = end)//扫描
 	{
@@ -24,7 +26,7 @@ string change(const string getstring)//中缀表达式转后缀表达式
 		{
 			tempstring = getstring.substr(start, 1);
 			end = end + 1;
-		
+
 			if (tempstring == "(")
 			{
 				char c = '(';
@@ -42,6 +44,7 @@ string change(const string getstring)//中缀表达式转后缀表达式
 			}
 			else if ((tempstring == "*") || (tempstring == "/"))
 			{
+				count1++;
 				while ((str_stack.empty() != true) && (str_stack.top() == '*' || str_stack.top() == '/'))
 				{
 					want += str_stack.top();
@@ -50,9 +53,11 @@ string change(const string getstring)//中缀表达式转后缀表达式
 				}
 				char c = tempstring[0];
 				str_stack.push(c);
+
 			}
 			else if (tempstring == "+")
 			{
+				count1++;
 				while ((str_stack.empty() != true) && (str_stack.top() != '('))
 				{
 					want += str_stack.top();
@@ -65,8 +70,9 @@ string change(const string getstring)//中缀表达式转后缀表达式
 			else if (tempstring == "-")//由于减号有可能代表负数 故将该情况分开讨论
 			{
 				int end2 = end - 1;
-				if (end2==0)
+				if (end2 == 0)
 				{
+					count2++;
 					end = getstring.find_first_of(ss, 1);
 					want += getstring.substr(start, end - start);
 					want += " ";
@@ -81,9 +87,11 @@ string change(const string getstring)//中缀表达式转后缀表达式
 						end = getstring.find_first_of(ss, end + 1);
 						want += getstring.substr(end2, end - end2);
 						want += " ";
+						count2++;
 					}
 					else
 					{
+						count1++;
 						while ((str_stack.empty() != true) && (str_stack.top() != '('))
 						{
 							want += str_stack.top();
@@ -94,15 +102,15 @@ string change(const string getstring)//中缀表达式转后缀表达式
 						str_stack.push(c);
 					}
 
-					
+
 				}
-				
+
 			}
-		
+
 		}
 		else//数字
 		{
-
+			count2++;
 			if (end == -1)
 			{
 				end = getstring.length();
@@ -112,7 +120,7 @@ string change(const string getstring)//中缀表达式转后缀表达式
 			want += tempstring;
 			want += " ";
 		}
-	
+
 	}
 	while (str_stack.empty() != true)
 	{
@@ -121,9 +129,16 @@ string change(const string getstring)//中缀表达式转后缀表达式
 		str_stack.pop();
 
 	}
-	return want;
+	if (count1 == count2 - 1)
+	{
+		return want;
+	}
+	else
+	{
+		string aaa = "no";
+		cout << "error" << endl;
+		return aaa;
+	}
+
 
 }
-
-
-
